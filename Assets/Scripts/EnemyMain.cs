@@ -14,7 +14,7 @@ public class EnemyMain : MonoBehaviour
 
     private void _AddRandomBehaviorScript()
     {
-        Type[] behaviorComponents = { typeof(FIrer), typeof(Chaser) };
+        Type[] behaviorComponents = { typeof(FIrer), typeof(Chaser), typeof(RandomRunner) };
         gameObject.AddComponent(Utility.GetRandomElement(behaviorComponents));
     }
 

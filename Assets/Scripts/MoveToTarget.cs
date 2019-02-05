@@ -12,6 +12,7 @@ public class MoveToTarget : MonoBehaviour
         var target = GetComponent<Target>();
         var speed = GetComponent<Speed>();
         Debug.Assert(target != null);
-        transform.position = Vector2.MoveTowards(transform.position, target.Position, speed.value * Time.deltaTime);
+        if (target.Position != null)
+            transform.position = Vector2.MoveTowards(transform.position, target.Position, speed.value * Time.deltaTime);
     }
 }
