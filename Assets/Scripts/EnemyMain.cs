@@ -7,6 +7,7 @@ public class EnemyMain : MonoBehaviour
 {
 	public EnemyManager Manager { get; set; }
 	public GameObject BulletPrefab;
+	public int PointValue = 5;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -21,6 +22,7 @@ public class EnemyMain : MonoBehaviour
 
 	public void DestroySelf()
 	{
+		EventManager.Instance.TriggerEvent(new EnemyDied(PointValue));
 		Manager.Destroy(this);
 	}
 }
