@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
 		{
 			GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
 			bullet.GetComponent<Bullet>().Shooter = gameObject;
-			bullet.GetComponent<Bullet>().Direction = (GetComponent<Target>().Position - transform.position) * BulletSpeed;
+			bullet.GetComponent<Bullet>().Direction = (GetComponent<Target>().Position - transform.position).normalized * BulletSpeed;
 		}
 	}
 }
