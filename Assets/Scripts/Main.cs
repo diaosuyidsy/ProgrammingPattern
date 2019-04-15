@@ -4,34 +4,45 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
-    public int numEnemies = 30;
-    public int batch = 2;
-    private readonly EnemyManager _manager = new EnemyManager ();
+	public int numEnemies = 30;
+	public int batch = 2;
+	public GameObject GameStartButton;
+	private readonly EnemyManager _manager = new EnemyManager();
 
-    public void GameStart ()
-    {
-        StartCoroutine (GenerateEnemies (2f));
-    }
+	private void Awake()
+	{
+		Services.SM = new StateManager(this, GameStartButton);
+	}
 
-    public void GameEnd ()
-    {
-        StopAllCoroutines ();
-    }
+	private void Update()
+	{
+		Services.SM.Update();
+	}
 
-    IEnumerator GenerateEnemies (float time)
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds (time);
+	public void GameStart()
+	{
+		StartCoroutine(GenerateEnemies(2f));
+	}
 
-            for (int i = 0; i < batch && _manager.Population < numEnemies; i++)
-            {
-                var enemy = _manager.Create ();
-                var randomPosition = Camera.main.ViewportToWorldPoint (new Vector2 (Random.value, Random.value));
-                randomPosition.z = 0f;
-                enemy.transform.position = randomPosition;
-            }
-        }
-    }
+	public void GameEnd()
+	{
+		StopAllCoroutines();
+	}
+
+	IEnumerator GenerateEnemies(float time)
+	{
+		while (true)
+		{
+			yield return new WaitForSeconds(time);
+
+			for (int i = 0; i < batch && _manager.Population < numEnemies; i++)
+			{
+				var enemy = _manager.Create();
+				var randomPosition = Camera.main.ViewportToWorldPoint(new Vector2(Random.value, Random.value));
+				randomPosition.z = 0f;
+				enemy.transform.position = randomPosition;
+			}
+		}
+	}
 
 }
